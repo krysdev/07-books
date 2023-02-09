@@ -4,7 +4,8 @@ import { useContext } from 'react';
 import BooksContext from '../context/books';
 
 function BookList({ books, onDelete, onEdit }) {
-  const contextValue = useContext(BooksContext);
+  // destructurizing 'valueToShare' from 'books.js'
+  const {count, incrementCount} = useContext(BooksContext);
 
   const renderedBooks = books.map((el) => {
     return (
@@ -14,7 +15,9 @@ function BookList({ books, onDelete, onEdit }) {
 
   return (
     <div className="book-list">
-      {renderedBooks} - {contextValue}
+      {count}
+      <button onClick={incrementCount}>XX</button>
+      {renderedBooks}
     </div>
   );
 }
