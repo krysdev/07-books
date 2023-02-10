@@ -1,7 +1,10 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
+import BooksContext from '../context/books';
 import BookEdit from './BookEdit';
 
-function BookShow({ book, onDelete, onEdit }) {
+function BookShow({ book }) {
+  const { onDelete } = useContext(BooksContext);
+
   const [showEdit, setShowEdit] = useState(false);
 
   const handleDeleteClick = () => {
@@ -13,15 +16,17 @@ function BookShow({ book, onDelete, onEdit }) {
     // console.log(showEdit)
   };
 
-  const handleSubmit = (idToEdit, titleToBeChanged) => {
-    setShowEdit(false)
-    onEdit(idToEdit, titleToBeChanged)
-    // onEdit is combined with setShowEdit in a wrapper function which is then passed to BookEdit
+  const handleSubmit = () => {
+    setShowEdit(false);
   };
 
   return (
     <div className="book-show">
-      <img className='picture' src={`https://picsum.photos/seed/${book.id}/150`} alt="picsum" />
+      <img
+        className="picture"
+        src={`https://picsum.photos/seed/${book.id}/150`}
+        alt="picsum"
+      />
       {showEdit ? (
         <BookEdit book={book} onSave={handleSubmit} />
       ) : (

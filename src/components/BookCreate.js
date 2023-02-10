@@ -1,6 +1,10 @@
+import { useContext } from 'react';
 import { useState } from 'react';
+import BooksContext from '../context/books';
 
-function BookCreate({ onCreate }) {
+function BookCreate() {
+  const { onCreate } = useContext(BooksContext);
+
   const [word, setWord] = useState('');
   // console.log(word)
   const doTheJob = (e) => {
@@ -10,14 +14,15 @@ function BookCreate({ onCreate }) {
   };
 
   return (
-    <div className='book-create'>
+    <div className="book-create">
       <form onSubmit={doTheJob}>
         <label>Add a book</label>
-        <input className='input'
+        <input
+          className="input"
           onChange={(e) => setWord(e.target.value)}
           value={word}
         />
-        <button className='button'>Add</button>
+        <button className="button">Add</button>
       </form>
       {/* <button onClick={doTheJob}>Create</button> */}
     </div>
